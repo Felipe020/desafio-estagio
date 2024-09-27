@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
 
 import {
   Container,
@@ -16,6 +17,7 @@ import { toast } from 'react-toastify';
 import useWindowSize from '@/hooks/useWindowSize';
 import { Button } from '@material-ui/core';
 import { buttonTheme } from '@/utils/Config';
+import CreateProduct from '@/components/crud/create';
 
 const StudentTable: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -41,8 +43,22 @@ const StudentTable: React.FC = () => {
       });
   }, []);
 
+  const YourComponent = () => {
+    const router = useRouter();
+
+    const openCreateStudentModal = (): void => {
+        router.push('/create'); 
+    };
+
+    return (
+        <div>
+            <button onClick={openCreateStudentModal}>Criar Estudante</button>
+        </div>
+    );
+};
+
   const openCreateStudentModal = (): void => {
-    alert('Abrir modal de criação de aluno');
+    <CreateProduct/>
   };
 
   const openDeleteStudentModal = (id: number): void => {
